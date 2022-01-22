@@ -22,3 +22,4 @@ app.use((error, req, res, next) => {
 });
 const porta = process.env.PORT || 3000;
 app.listen(porta);
+console.log("running on "+porta);

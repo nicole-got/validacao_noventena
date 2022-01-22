@@ -7,17 +7,17 @@ app.use(express.json({ limit: "10mb", extended: true }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 const createError = require("http-errors");
 const axios = require("axios");
-const db = require("./src/infrastructure/database/models");
 const jwt = require("jsonwebtoken");
 const config = "security-auth";
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const container = createContainer();
+const cache = require('memory-cache');
+const moment = require('moment');
 
 container
     .register({
         createError: asValue(createError),
-        db: asValue(db),
         axios: asValue(axios),
         jwt: asValue(jwt),
         config: asValue(config),
@@ -25,6 +25,8 @@ container
         app: asValue(app),
         express: asValue(express),
         joi: asValue(Joi),
+        cache: asValue(cache),
+        moment: asValue(moment)
     })
     .loadModules(
         [
